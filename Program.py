@@ -38,7 +38,7 @@ def main(from_file: str, to_file: str,
     # 不能用join，用join的话线程无法响应Ctrl+C
     # 对所有线程使用is_alive
     print("Converting&Playing file...")
-    bar = PacmanBar(thread_pool[-1].max_progress)
+    bar = PacmanBar(thread_pool[0].max_progress)
     while True:
         # 如果没有创建任何线程,或者如果所有线程都结束了,退出
         if not thread_pool or {t.is_alive() for t in thread_pool} == {False}:
@@ -48,8 +48,8 @@ def main(from_file: str, to_file: str,
             bar.printBar()
             print("\r\nSuccess")
             sys.exit(0)
-        bar.current_progress = thread_pool[-1].current_progress
-        bar.suffix_content = "{}%".format(int(thread_pool[-1].current_progress / thread_pool[-1].max_progress * 100))
+        bar.current_progress = thread_pool[0].current_progress
+        bar.suffix_content = "{}%".format(int(thread_pool[0].current_progress / thread_pool[0].max_progress * 100))
         bar.printBar()
 
 

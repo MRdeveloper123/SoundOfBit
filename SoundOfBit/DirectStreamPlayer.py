@@ -23,7 +23,6 @@ class DirectStreamPlayer(threading.Thread):
         self.finished = False
 
     def run(self) -> None:
-        print("Playing file: {}".format(self.file_location))
         gen = Universal.fileIter(self.file_location, self.buffer)
         while True:
             try:
