@@ -48,8 +48,9 @@ def main(from_file: str, to_file: str,
             bar.printBar()
             print("\r\nSuccess")
             sys.exit(0)
-        bar.current_progress = thread_pool[0].current_progress
-        bar.suffix_content = "{}%".format(int(thread_pool[0].current_progress / thread_pool[0].max_progress * 100))
+        # 确保显示的进度是转换的进度，而不是播放的进度，除非只是在播放
+        bar.current_progress = thread_pool[-1].current_progress
+        bar.suffix_content = "{}%".format(int(thread_pool[-1].current_progress / thread_pool[-1].max_progress * 100))
         bar.printBar()
 
 
